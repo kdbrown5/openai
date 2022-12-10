@@ -58,6 +58,6 @@ def submission():
 
 if __name__ == '__main__':
     app.config['TEMPLATES_AUTO_RELOAD'] = True #reload html templates when saved, while app is running
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='127.0.0.1', debug=True)
 
     
