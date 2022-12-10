@@ -8,7 +8,11 @@ from flask import Flask, flash, session, render_template, render_template_string
 import openai
 import bleach
 
-openai.api_key = "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"
+loadkey=open('../topseekrit', 'r')
+dbkey=loadkey.read()
+loadkey.close()
+openai.api_key = dbkey
+
 
 extra_dirs = ['templates/', ] #reload html templates when saved, while app is running
 extra_files = extra_dirs[:]
