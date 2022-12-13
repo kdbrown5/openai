@@ -57,9 +57,9 @@ def submission():
         if padding <= 20:
             padding=100
         elif padding <=25: 
-            padding = (((math.ceil(padding / 2) * 2) / 2 )+98 ) # round up to nearest even number, then divide by two and add 100.  total = 100-115% padding
+            padding = (((math.ceil(padding / 2) * 2) / 2 )+98 ) 
         elif padding <=30:
-            padding = (((math.ceil(padding / 2) * 2) / 2 )+105 ) # round up to nearest even number, then divide by two and add 100.  total = 100-115% padding
+            padding = (((math.ceil(padding / 2) * 2) / 2 )+105 )
         response = response.split('\n')
         return render_template("Question.html", error=error, response=response, padding=padding)
 
