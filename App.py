@@ -42,7 +42,7 @@ def submission():
         model="text-davinci-003",
         prompt=myquestion,
         temperature=0.5,
-        max_tokens=100,
+        max_tokens=1000,
         top_p=0.3,
         frequency_penalty=0.5,
         presence_penalty=0.0
@@ -52,6 +52,7 @@ def submission():
     if request.method == 'POST':
         userquestion = bleach.clean(request.form.get('question'))
         response = answer(userquestion)
+        response = response.split('\n')
         return render_template("Question.html", error=error, response=response)
 
     return render_template("Question.html", error=error)
