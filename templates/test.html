@@ -71,13 +71,10 @@ a:hover {
 /*
  * Base structure
  */
+
 html,
 body {
-  {% if padding %}
-    height: {{ padding }}%;
-    {% else %}
-      height: 100%;
-    {% endif %}
+  height: 100%;
   background-color: #333;
 }
 
@@ -218,12 +215,11 @@ textarea{
   <p>{{para}}</p>
 {% endfor %}
 </h2>
-
 <br><br>
 
-<!-- 
+
 <button class="btn btn-primary" onclick="renderresponsef();">Copy</button> 
--->   
+ 
 <br>
 <br>
   </body>
