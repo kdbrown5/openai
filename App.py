@@ -7,6 +7,7 @@ from flask import Flask, flash, session, render_template, render_template_string
     Response, g, Markup, Blueprint, make_response
 import openai
 import bleach
+import math
 
 loadkey=open('../topseekrit', 'r')
 dbkey=loadkey.read()
@@ -31,7 +32,6 @@ def home():
     error = None
     return render_template("Question.html", error=error)
 
-
 @app.route('/submit', methods=('GET', 'POST'))
 def submission():
     error = None
@@ -52,10 +52,24 @@ def submission():
     if request.method == 'POST':
         userquestion = bleach.clean(request.form.get('question'))
         response = answer(userquestion)
+        padding = (response.count('\n') )
+        print(padding)
+        if padding <= 20:
+            padding=100
+        elif padding <=25: 
+            padding = (((math.ceil(padding / 2) * 2) / 2 )+98 )# round up to nearest even number, then divide by two and add 100.  total = 100-115% padding
+        elif padding <=30:
+            padding = (((math.ceil(padding / 2) * 2) / 2 )+105 )# round up to nearest even number, then divide by two and add 100.  total = 100-115% padding
         response = response.split('\n')
-        return render_template("Question.html", error=error, response=response)
+        return render_template("Question.html", error=error, response=response, padding=padding)
 
     return render_template("Question.html", error=error)
+
+@app.route('/test', methods=['POST', 'GET'])
+
+def testing():
+    error = None
+    return render_template("Test.html", error=error)
 
 if __name__ == '__main__':
     app.config['TEMPLATES_AUTO_RELOAD'] = True #reload html templates when saved, while app is running
